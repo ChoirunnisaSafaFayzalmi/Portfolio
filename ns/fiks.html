@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choirunnisa Safa Fayzalmi - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111827;
+            color: #d1d5db;
+            cursor: none;
+            overflow-x: hidden; 
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #f50057, #880e4f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #f472b6;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #a855f7;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease-out;
+        }
+        
+        .cursor-outline.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(244, 114, 182, 0.2);
+            border-color: transparent;
+        }
+
+        #home {
+            background: linear-gradient(135deg, #f472b6, #a855f7, #4f46e5, #111827);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+        }
+
+        .navbar { transition: all 0.3s ease-in-out; }
+        .navbar-scrolled {
+            background-color: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #374151;
+        }
+        
+        .nav-link.active { 
+            color: #f472b6;
+            font-weight: 600; 
+        }
+        
+        .project-card, .certification-card, .skill-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: 1px solid #374151;
+        }
+        .project-card:hover, .certification-card:hover, .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #a855f7;
+        }
+        
+        .modal-content-dark { background-color: #1f2937; }
+        .modal-content { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal.hidden { display: none; }
+        
+        .profile-frame {
+            padding: 8px;
+            background: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .profile-img {
+            border-radius: 50%;
+            border: 5px solid #111827;
+            display: block;
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+        }
+        @media (min-width: 768px) {
+            .profile-img { width: 280px; height: 280px; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-link-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav id="navbar" class="navbar fixed w-full z-50 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-2xl font-bold text-gradient">Nisa Fayzalmi</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-pink-400 transition duration-300">Home</a>
+                    <a href="#about" class="nav-link text-gray-300 hover:text-pink-400 transition duration-300">About</a>
+                    <a href="#portfolio" class="nav-link text-gray-300 hover:text-pink-400 transition duration-300">Portfolio</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-pink-400 transition duration-300">Skills</a>
+                    <a href="#certifications" class="nav-link text-gray-300 hover:text-pink-400 transition duration-300">Certifications</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-pink-400 transition duration-300">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-300 p-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white rounded-md">About</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white rounded-md">Skills</a>
+                <a href="#portfolio" class="block px-3 py-2 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white rounded-md">Portfolio</a>
+                <a href="#certifications" class="block px-3 py-2 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white rounded-md">Certifications</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-200 hover:bg-gray-700 hover:text-white rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12 text-center">
+                <div class="md:w-1/2" data-aos="fade-right" data-aos-duration="1000">
+                    <span class="text-lg text-pink-400 font-semibold mb-2 block">Hello, I'm</span>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight text-white">
+                        <span class="text-purple-400">Choirunnisa</span> Safa Fayzalmi
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg mx-auto">Informatics Engineering student with a passion for <strong>UI/UX Design</strong> and <strong>Network Engineering</strong>.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#portfolio" class="px-8 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition duration-300 transform hover:scale-105">View My Project</a>
+                        <a href="certification/CV CHOIRUNNISA.pdf" download class="px-8 py-3 border border-gray-600 text-gray-200 rounded-full font-medium hover:bg-gray-700 transition duration-300">Download CV</a>
+                    </div>
+                </div>
+                <div class="md:w-auto flex justify-center relative mt-10 md:mt-0" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="profile-frame">
+                        <img src="images/me.jpg" alt="Profile Photo" class="profile-img" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-gray-800 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">About Me</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/3" data-aos="fade-right" data-aos-duration="800">
+                    <img src="images/me2.png" alt="Creative UI/UX designer working" class="rounded-xl shadow-xl w-full max-w-sm mx-auto" />
+                </div>
+                <div class="md:w-2/3" data-aos="fade-left" data-aos-duration="800">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Designing and Developing Digital Solutions that Connect</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">My name is Choirunnisa Safa Fayzalmi, an Informatics Engineering student at Politeknik Negeri Semarang with a strong interest in application development and UI/UX design. Through academic projects and self-directed learning, I’ve gained solid experience in creating user-centered and responsive digital solutions, including mobile apps, interactive websites, and management systems like attendance tracking tools.</p>
+                    <p class="text-gray-400 mb-8 leading-relaxed">In addition to my design and development skills, I also have hands-on experience in computer networking, particularly in configuring and managing MikroTik devices. I hold an official certification from <strong>BNSP (Badan Nasional Sertifikasi Profesi)</strong> in the field of networking, which strengthens my technical foundation. I enjoy collaborating in teams and continuously improving my communication and problem-solving abilities. Currently, I am seeking an internship opportunity as a UI/UX Designer, where I can apply my skills to build visually engaging and user-friendly interfaces.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-4"><i class="fas fa-lightbulb text-white text-xl"></i></div>
+                                <h4 class="font-semibold text-lg text-white">UX Research</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm">User Interviews, Persona Creation, Journey Mapping, Usability Testing</p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-4"><i class="fas fa-paint-brush text-white text-xl"></i></div>
+                                <h4 class="font-semibold text-lg text-white">UI Design</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm">Visual Design, Interactive Prototyping, Design Systems, Wireframing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-gray-900 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">My Portfolio</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-1')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/justip.png" alt="JUSTIPIN UI/UX Design" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">JUSTIPIN</h3>
+                        <p class="text-gray-400 text-sm mb-4">A web-based proxy shopping platform with intuitive and transparent UI/UX design.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">UI/UX Design</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-2')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/PBL/1.png" alt="Online Exam Platform" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">ONLINE EXAM PLATFORM</h3>
+                        <p class="text-gray-400 text-sm mb-4">Web admin application for managing online exams, from scheduling to score recap.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">Frontend</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-3')" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e60acb3-16bf-46b1-8025-80451fa2e1b8.png" alt="Automatic Waste Sorting System" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">WASTE SORTING SYSTEM</h3>
+                        <p class="text-gray-400 text-sm mb-4">An embedded system using sensors to automatically sort waste.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">Embedded System</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-4')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/IOT/3.png" alt="IoT Smart Trash Bin Monitoring" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">SMART TRASH BIN MONITORING</h3>
+                        <p class="text-gray-400 text-sm mb-4">An IoT-based system using ESP32 and Firebase for real-time trash monitoring.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">IoT</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-5')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/SOIL.png" alt="Soil Classification AI" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">SOIL CLASSIFICATION</h3>
+                        <p class="text-gray-400 text-sm mb-4">An AI-based machine learning project to categorize soil types.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">AI/Machine Learning</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-6')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/ARCADE.png" alt="Arcade Galaxy Game Collection" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">ARCADE GALAXY</h3>
+                        <p class="text-gray-400 text-sm mb-4">A collection of space-themed arcade games including Planetarium Journey, Space Arena, and more.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">Game Development</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project<i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-7')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/DUNGEON/2.png" alt="Dungeon Seeker Game" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">DUNGEON SEEKER</h3>
+                        <p class="text-gray-400 text-sm mb-4">An adventure game featuring chapters like The Forgotten Hall and Dark Forest of Whispers.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">Game Development</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-8')" data-aos="fade-up" data-aos-delay="300">
+                    <img src="images/AR/2.png" alt="AR/VR Human Body Organs Project" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">AR/VR HUMAN BODY ORGANS</h3>
+                        <p class="text-gray-400 text-sm mb-4">An interactive AR/VR application for learning about human organs using Unity and Vuforia.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-purple-400 font-semibold bg-purple-900/50 px-3 py-1 rounded-full">Multimedia System</span>
+                            <button class="text-sm font-medium text-pink-400 hover:text-pink-300 transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="py-24 bg-gray-800 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">My Skills</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div data-aos="fade-right" data-aos-duration="800">
+                    <h3 class="text-2xl font-semibold mb-8 text-center md:text-left text-white">Design & Development</h3>
+                    <div class="grid grid-cols-2 gap-6 text-center">
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-palette text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">UI/UX Design</h4><p class="text-gray-400 text-sm mt-2">Figma,Prototyping</p></div>
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-code text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">Web Development</h4><p class="text-gray-400 text-sm mt-2">HTML, CSS, JavaScript, Tailwind CSS</p></div>
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-brain text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">Machine Learning</h4><p class="text-gray-400 text-sm mt-2">Python, Data Science, AI</p></div>
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-mobile-alt text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">App Development</h4><p class="text-gray-400 text-sm mt-2">Flutter, Android Studio</p></div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="800">
+                    <h3 class="text-2xl font-semibold mb-8 text-center md:text-left text-white">Networking & Tools</h3>
+                    <div class="grid grid-cols-2 gap-6 text-center">
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-network-wired text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">Network Engineering</h4><p class="text-gray-400 text-sm mt-2">MikroTik, Cisco</p></div>
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-database text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">Database Management</h4><p class="text-gray-400 text-sm mt-2">MySQL, PostgreSQL, MongoDB</p></div>
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-server text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">Cloud Computing</h4><p class="text-gray-400 text-sm mt-2">Firebase, AWS</p></div>
+                        <div class="skill-card bg-gray-900 p-6 rounded-xl"><i class="fas fa-microchip text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-white">Embedded System</h4><p class="text-gray-400 text-sm mt-2">Arduino, ESP32</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="py-24 bg-gray-900 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">My Certifications</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <a href="certification/Certificate JuniorNetworkAdministrator.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/bnsp.png" alt="BNSP Network Engineering Certification" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Junior Network Administrator</h4><p class="text-gray-400 text-sm">Issued by BNSP</p></div>
+                </a>
+                
+                <a href="certification/Certificate DatabaseProgrammingSQL.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/programming.png" alt="Oracle Academy: Database Programming" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Database Programming SQL</h4><p class="text-gray-400 text-sm">Issued by ORACLE Academy</p></div>
+                </a>
+
+                <a href="certification/Certificate DatabaseDesignSQL.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/design.png" alt="Oracle Academy: Database Design" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Database Design SQL</h4><p class="text-gray-400 text-sm">Issued by ORACLE Academy</p></div>
+                </a>
+
+                <a href="certification/Certificate CCNA.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/ccna.png" alt="Cisco Certified Network Associate (CCNA)" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">CCNA</h4><p class="text-gray-400 text-sm">Issued by CISCO Networking Academy</p></div>
+                </a>
+                
+                <a href="certification/LinkedIn.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/AI.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Career Essentials in Generative AI</h4><p class="text-gray-400 text-sm">Issued by LinkedIn</p></div>
+                </a>
+
+                <a href="certification/bitcoin.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/bitcoin.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Bitcoin for Developers</h4><p class="text-gray-400 text-sm">Issued by Saylor.org Academy</p></div>
+                </a>
+
+                <a href="certification/software.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/software.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Software Engineering</h4><p class="text-gray-400 text-sm">Issued by Saylor.org Academy</p></div>
+                </a>
+
+                <a href="certification/c++.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/c++.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">C++ Programming</h4><p class="text-gray-400 text-sm">Issued by Saylor.org Academy</p></div>
+                </a>
+
+                <a href="certification/Prompt Engineering.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/engineering.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Prompt Engineering untuk Software Developer</h4><p class="text-gray-400 text-sm">Issued by dicoding</p></div>
+                </a>
+
+                <a href="certification/Memulai Dasar Pemrograman.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/dasarprogram.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white"> Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h4><p class="text-gray-400 text-sm">Issued by dicoding</p></div>
+                </a>
+
+                 <a href="certification/GoogleCloud.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/GOOGLECLOUD.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Belajar Dasar Google Cloud</h4><p class="text-gray-400 text-sm">Issued by dicoding</p></div>
+                </a>
+
+                <a href="certification/dasar cloud.pdf" target="_blank" class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/dasar cloud.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center"><h4 class="font-bold text-lg text-white">Belajar Dasar Cloud dan Gen AI di AWS</h4><p class="text-gray-400 text-sm">Issued by dicoding</p></div>
+                </a>
+                
+
+                <div class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openCertModal('cert-5')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/ID.png" alt="Sertifikat Partisipasi Webinar" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-lg text-white">CSCU Introduction : Securing Email Communication</h4>
+                        <p class="text-gray-400 text-sm">Certificate of Participation</p>
+                    </div>
+                </div>
+
+                <div class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openCertModal('cert-6')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/spotlight.png" alt="Sertifikat Partisipasi Webinar" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-lg text-white">Spotlight | Mengapa Perlu Container ?</h4>
+                        <p class="text-gray-400 text-sm">Certificate of Participation</p>
+                    </div>
+                </div>
+
+                <div class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openCertModal('cert-7')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/data science.png" alt="Sertifikat Partisipasi Webinar" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-lg text-white">Data Science | Memulai Karir Sebagai Data Scientist</h4>
+                        <p class="text-gray-400 text-sm">Certificate of Participation</p>
+                    </div>
+                </div>
+
+                <div class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openCertModal('cert-8')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/machine learning.png" alt="Sertifikat Partisipasi Webinar" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-lg text-white">Machine Learning | Kustomisasi Model Deep Learning dan Time Series Forecasting dengan Sequence to Sequence</h4>
+                        <p class="text-gray-400 text-sm">Certificate of Participation</p>
+                    </div>
+                </div>
+
+                <div class="certification-card bg-gray-800 rounded-xl overflow-hidden cursor-pointer" onclick="openCertModal('cert-8')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/n8n.png" alt="Sertifikat Partisipasi Webinar" class="w-full h-48 object-cover object-center" />
+                    <div class="p-4 text-center">
+                        <h4 class="font-bold text-lg text-white">Series Workshop | Intro to n8n </h4>
+                        <p class="text-gray-400 text-sm">Certificate of Participation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-gray-800 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">Get In Touch</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-6 max-w-2xl mx-auto">
+                    Have a project idea or just want to say hello? My inbox is always open. I'll get back to you as soon as I can!
+                </p>
+            </div>
+
+            <div class="max-w-2xl mx-auto" data-aos="fade-up">
+                
+                <div class="glass-card p-8 rounded-2xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Let's Connect</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        My inbox is always open, whether for an internship opportunity, a cool project, or just a friendly chat about design and technology. Feel free to send me a message—I'm excited to hear from you!
+                    </p>
+                    <form action="https://formspree.io/f/xrbldydg" method="POST" class="space-y-4">
+                        <div><label for="name" class="block text-gray-300 font-medium mb-2">Name</label><input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition" placeholder="Your name" required></div>
+                        <div><label for="email" class="block text-gray-300 font-medium mb-2">Email</label><input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition" placeholder="Your email" required></div>
+                        <div><label for="message" class="block text-gray-300 font-medium mb-2">Message</label><textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition" placeholder="Tell me about your project" required></textarea></div>
+                        <button type="submit" class="w-full px-6 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition duration-300 transform hover:scale-105">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Connect With Me</h3>
+                    <a href="https://www.linkedin.com/in/nisafayzalmi6" target="_blank" class="flex items-center bg-gray-900 hover:bg-gray-700 rounded-lg p-3 mb-3 transition">
+                        <div class="bg-blue-500 text-white rounded-md p-2 mr-4"><i class="fab fa-linkedin-in text-lg"></i></div>
+                        <div>
+                            <p class="font-semibold text-white">LinkedIn</p>
+                            <p class="text-sm text-gray-400">Let's connect professionally</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/nnisachou" target="_blank" class="flex items-center bg-gray-900 hover:bg-gray-700 rounded-lg p-3 mb-3 transition">
+                        <div class="bg-gradient-to-r from-pink-500 to-orange-400 text-white rounded-md p-2 mr-4"><i class="fab fa-instagram text-lg"></i></div>
+                        <div>
+                            <p class="font-semibold text-white">Instagram</p>
+                            <p class="text-sm text-gray-400">@nnisachou</p>
+                        </div>
+                    </a>
+                    <a href="https://github.com/ChirunnisaSafaFayzalmi" target="_blank" class="flex items-center bg-gray-900 hover:bg-gray-700 rounded-lg p-3 mb-3 transition">
+                        <div class="bg-gray-700 text-white rounded-md p-2 mr-4"><i class="fab fa-github text-lg"></i></div>
+                        <div>
+                            <p class="font-semibold text-white">Github</p>
+                            <p class="text-sm text-gray-400">@ChoirunnisaSafaFayzalmi</p>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+            </div>
+    </section>
+
+    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden p-4">
+        <div class="modal-content modal-content-dark rounded-xl max-w-3xl w-full mx-auto p-8 relative">
+            <button class="modal-close absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-bold leading-none">&times;</button>
+            <div id="modal-body" class="text-white"></div>
+        </div>
+    </div>
+    
+    <div id="cert-modal" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden p-4">
+        <div class="modal-content modal-content-dark rounded-xl max-w-4xl w-full mx-auto p-8 relative">
+            <button class="cert-modal-close absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-bold leading-none">&times;</button>
+            <div id="cert-modal-body" class="max-h-[80vh] overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-bg-gray-400 text-sm">© 2025 Choirunnisa Safa Fayzalmi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        const projects = {
+            'project-1': { 
+            title: 'JUSTIPIN', 
+            image: 'images/justip.png', 
+            description: 'A web-based proxy shopping platform that is safe, simple, and transparent. I designed the UI/UX to ensure an intuitive and efficient user experience when placing orders online. My role involved user research, wireframing, and creating a modern, user-friendly interface.', 
+            tags: ['UI/UX Design', 'User Research', 'Figma', 'Web Design'], 
+            link: 'https://justipin.my.id/', 
+            linkText: 'View Project' },
+            'project-2': { 
+            title: 'ONLINE EXAM PLATFORM', 
+            images: ['images/PBL/2.png', 'images/PBL/3.png', 'images/PBL/4.png', 'images/PBL/5.png', ],
+            description: 'The online exam management application is a web admin application used to manage online exams with master data, scheduling, monitoring, and score recap features. I was responsible for both front-end and back-end development, ensuring a robust and scalable system.', 
+            tags: ['Frontend', 'Backend', 'PHP', 'JavaScript'], 
+            link: 'https://github.com/ChoirunnisaSafaFayzalmi/aplikasi-ujian-online.git', 
+            linkText: 'View on GitHub' },
+            'project-3': { 
+            title: 'AUTOMATIC WASTE SORTING SYSTEM', 
+            image: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e60acb3-16bf-46b1-8025-80451fa2e1b8.png', 
+            description: 'An embedded system that uses sensors and a microcontroller to automatically sort waste into appropriate categories, improving recycling efficiency. This project highlights my skills in hardware-software integration and problem-solving in a real-world context.', 
+            tags: ['Embedded System', 'IoT', 'Arduino', 'Sensors'], 
+            link: '#', 
+            linkText: 'View Documentation' },
+            'project-4': { 
+            title: 'DESIGN OF IOT-BASED SMART TRASH BIN MONITORING USING ESP32 AND FIREBASE', 
+            images: [ 'images/IOT/13.png', 'images/IOT/9.png', 'images/IOT/10.png', 'images/IOT/11.png', 'images/IOT/12.png', ], // BENAR
+            description: 'A smart trash bin monitoring system leveraging IoT technology, designed using an ESP32 microcontroller and integrated with Firebase for real-time data storage and monitoring. I developed the entire system from the ground up, including hardware and software components.', 
+            tags: ['IoT', 'Embedded System', 'ESP32', 'Firebase'], 
+            link: '#', 
+            linkText: 'View on GitHub' 
+            },
+            'project-5': { 
+            title: 'SOIL CLASSIFICATION', 
+            image: 'images/SOIL.png', 
+            description: 'An AI-based project that uses machine learning to categorize soil types from their characteristics, supporting agriculture and environmental management. This project showcases my proficiency in data science and machine learning techniques.', 
+            tags: ['Artificial Intelligence', 'Machine Learning', 'Data Science', 'Python'], 
+            link: 'https://github.com/ChoirunnisaSafaFayzalmi/Klasifikasi_Tanah.git', 
+            linkText: 'View on GitHub' },
+            'project-6': { 
+            title: 'ARCADE GALAXY', 
+            images: ['images/PLANET.png','images/SPACE.png','images/COSMIC.png'],
+            description: 'Dive into Arcade Galaxy, a space arcade collection! This project features three distinct games: the exploratory Planetarium Journey, the action-packed Space Arena, and the strategic Cosmic Gatekeepers.', 
+            tags: ['Game Development', 'Unity', 'C#', 'Canva'], 
+            link: 'https://URL-NOTION-PROYEK-ARCADE-GALAXY-KAMU', 
+            linkText: 'View Case Study' },
+            'project-7': { 
+            title: 'DUNGEON SEEKER', 
+            images: [ 'images/DUNGEON/Play.png', 'images/DUNGEON/Play (1).png', 'images/DUNGEON/Play (2).png', ],
+            description: 'Get ready for an epic action-adventure game built in the Unity engine, challenging you to survive through three gripping chapters. Your journey begins in the silence of The Forgotten Hall, where ancient ruins hide intricate puzzles and are guarded by spirits of the past. Your courage will then be tested as you descend deeper into The Depths & Chamber of Flame, a scorching underworld filled with rivers of lava and ferocious fiery foes. Ultimately, you must enter The Dark Forest of Whispers, a cursed woodland where illusions and maddening whispers will torment your mind, becoming the final test for both your skill and your sanity.', 
+            tags: ['Game Development', 'Unity', 'C#', 'Canva'], 
+            link: 'https://drive.google.com/drive/folders/1FHRaVELOD3Pe9DsRix8Zo8U6MCyjSDFj?usp=sharing',
+            linkText: 'View Case Study'},
+            'project-8': { 
+            title: 'AR/VR HUMAN BODY ORGANS', 
+            images: ['images/AR/4.png', 'images/AR/5.png', 'images/AR/6.png', 'images/AR/8.png', 'images/AR/9.png', 'images/AR/10.png', 'images/AR/11.png', ],
+            description: 'An interactive AR/VR application for learning about human organs. Developed with Unity and Vuforia, with UI assets designed in Canva to create an engaging educational experience.', 
+            tags: ['AR/VR', 'Unity', 'Vuforia', 'Educational App', 'Canva'], 
+            link: 'https://drive.google.com/drive/folders/1c6mZlMou-8K4h7Fc06gqbd3byp-sYzoI?usp=sharing',
+            linkText: 'View Documentation' },
+        };
+        
+        const certifications = {
+            'cert-5': { image: 'images/ID.png', alt: '[CSCU Introduction : Securing Email Communication]' },
+            'cert-6': { image: 'images/spotlight.png', alt: '[Spotlight | Mengapa Perlu Container ?]' },
+            'cert-7': { image: 'images/data science.png', alt: '[Data Science | Memulai Karir Sebagai Data Scientist]' },
+            'cert-8': { image: 'images/machine learning.png', alt: '[Machine Learning | Kustomisasi Model Deep Learning dan Time Series Forecasting dengan Sequence to Sequence]' },
+            'cert-8': { image: 'images/n8n.png', alt: '[Series Workshop | Intro to n8n]' }
+        };
+
+        AOS.init({ once: true, duration: 800 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+            
+            const interactiveElements = document.querySelectorAll('a, button, .project-card, .certification-card, .skill-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+            });
+
+            const navbar = document.getElementById('navbar');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
+            });
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${targetId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.4 });
+            sections.forEach(section => sectionObserver.observe(section));
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                    if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // --- KODE UNTUK MODAL PROYEK ---
+            const projectModal = document.getElementById('project-modal');
+            const projectModalBody = document.getElementById('modal-body');
+            const projectModalClose = projectModal.querySelector('.modal-close');
+            
+            // =======================================================
+            // ========= MULAI PERUBAHAN PADA FUNGSI INI =========
+            // =======================================================
+            window.openProjectModal = function(projectId) {
+                const project = projects[projectId];
+                if (!project) return;
+
+                // 1. Membuat daftar gambar yang konsisten (selalu berupa array)
+                // Ini akan mengambil `project.images` jika ada, atau `[project.image]` jika hanya ada satu gambar.
+                const imageList = project.images || (project.image ? [project.image] : []);
+                
+                let galleryHTML = '';
+                // 2. Jika ada gambar di dalam daftar, buat galeri yang bisa di-scroll
+                if (imageList.length > 0) {
+                    galleryHTML = `
+                        <div class="flex overflow-x-auto gap-4 pb-4 mb-6 border-b border-gray-700">
+                            ${imageList.map(imgSrc => `
+                                <img src="${imgSrc}" alt="${project.title} gallery image" class="h-64 object-cover rounded-lg flex-shrink-0">
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                // 3. Menggabungkan galeri dengan sisa konten modal yang sudah ada
+                projectModalBody.innerHTML = `
+                    ${galleryHTML} 
+                    <h3 class="text-3xl font-bold mb-3">${project.title}</h3>
+                    <p class="text-gray-300 mb-6">${project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        ${project.tags.map(tag => `<span class="bg-gray-700 text-pink-300 text-sm px-3 py-1 rounded-full">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${project.link}" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition duration-300">
+                        ${project.linkText} <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-2"></i>
+                    </a>`;
+                
+                projectModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            // =======================================================
+            // ================== SELESAI PERUBAHAN ==================
+            // =======================================================
+
+            const closeProjectModal = () => {
+                projectModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+            projectModalClose.addEventListener('click', closeProjectModal);
+            
+
+            // --- KODE UNTUK MODAL SERTIFIKAT ---
+            const certModal = document.getElementById('cert-modal');
+            const certModalBody = document.getElementById('cert-modal-body');
+            const certModalClose = certModal.querySelector('.cert-modal-close');
+            window.openCertModal = function(certId) {
+                const cert = certifications[certId];
+                if (!cert) return;
+                certModalBody.innerHTML = `<img src="${cert.image}" alt="${cert.alt}" class="w-full h-auto object-contain rounded-lg">`;
+                certModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            const closeCertModal = () => {
+                certModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+            certModalClose.addEventListener('click', closeCertModal);
+
+            window.addEventListener('click', (e) => {
+                if (e.target === projectModal) closeProjectModal();
+                if (e.target === certModal) closeCertModal();
+            });
+        });
+    </script>
+</body>
+</html>
