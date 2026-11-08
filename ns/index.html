@@ -32,6 +32,21 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
+        /* Mencegah tampilan berantakan saat pertama kali dimuat */
+        html { background-color: #fdf2f8; } /* Warna bg terang */
+        html.dark { background-color: #1a070e; } /* Warna bg gelap */
+        
+        body {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+        }
+        
+        body.loaded {
+            opacity: 1;
+            visibility: visible;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             cursor: none;
@@ -820,7 +835,7 @@
             'project-8': { 
             title: 'DUNGEON SEEKER', 
             images: [ 'images/DUNGEON/Play.png', 'images/DUNGEON/Play (1).png', 'images/DUNGEON/Play (2).png', ],
-            description: 'Get ready for an epic action-adventure game built in the Unity engine, challenging you to survive through three gripping chapters. Your journey begins in the silence of The Forgotten Hall, where ancient ruins hide intricate puzzles and are guarded by spirits of the past. Your courage will then be tested as you descend deeper into The Depths & Chamber of Flame, a scorching underworld filled with rivers of lava and ferocious fiery foes. Ultimately, you must enter The Dark Forest of Whispers, a cursed woodland where illusions and maddening whispers will torment your mind, becoming the final test for both your skill and your sanity.', 
+            description: 'An epic action-adventure Unity game featuring three gripping chapters. Survive the haunted puzzles of The Forgotten Hall, brave the scorching lava of the Chamber of Flame, and conquer the mind-bending illusions of The Dark Forest of Whispers.', 
             tags: ['Game Development', 'Unity', 'C#', 'Canva'], 
             link: 'https://drive.google.com/drive/folders/1FHRaVELOD3Pe9DsRix8Zo8U6MCyjSDFj?usp=sharing',
             linkText: 'View Case Study'},
@@ -860,6 +875,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
 
+    
             // --- LOGIKA TEMA LIGHT/DARK ---
             const html = document.documentElement;
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -1008,6 +1024,13 @@
                 if (e.target === projectModal) closeProjectModal();
                 if (e.target === certModal) closeCertModal();
             });
+        });
+
+            // Menampilkan halaman dengan mulus hanya setelah semua gaya dan gambar selesai dimuat
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100); // Jeda ekstra 0.1 detik untuk memastikan Tailwind CDN selesai merender
         });
     </script>
 </body>
