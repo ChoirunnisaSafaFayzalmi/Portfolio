@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choirunnisa Safa Fayzalmi - Portfolio</title>
+    <link rel="icon" type="image\png" href="web\icons\f.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+     <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Konfigurasi Palette Matchu.id -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        matchu: {
+                            dark: '#270c17',       
+                            darker: '#1a070e',     
+                            cardDark: '#3d1324',   
+                            light: '#fdf2f8',      
+                            lighter: '#ffffff',    
+                            primary: '#be185d',    
+                            secondary: '#881337',  
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        /* Mencegah tampilan berantakan saat pertama kali dimuat */
+        html { background-color: #fdf2f8; } /* Warna bg terang */
+        html.dark { background-color: #1a070e; } /* Warna bg gelap */
+        
+        body {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+        }
+        
+        body.loaded {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            cursor: none;
+            overflow-x: hidden; 
+        }
+
+        /* Variabel Warna Dinamis untuk Teks dan Background Gradasi */
+        :root {
+            --grad-text-1: #be185d;
+            --grad-text-2: #881337;
+            --grad-bg-1: #fbcfe8;
+            --grad-bg-2: #be185d;
+            --grad-bg-3: #881337;
+            --grad-bg-4: #fdf2f8;
+        }
+
+        .dark {
+            --grad-text-1: #f472b6;
+            --grad-text-2: #fb7185;
+            --grad-bg-1: #3d1324;
+            --grad-bg-2: #881337;
+            --grad-bg-3: #270c17;
+            --grad-bg-4: #4a152b;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--grad-text-1), var(--grad-text-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #be185d;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s;
+        }
+        .dark .cursor-dot { background-color: #f472b6; }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #be185d;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease-out;
+        }
+        .dark .cursor-outline { border-color: #f472b6; }
+        
+        .cursor-outline.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: rgba(190, 24, 93, 0.1);
+            border-color: transparent;
+        }
+        .dark .cursor-outline.hover { background-color: rgba(244, 114, 182, 0.2); }
+
+        #home {
+            background: linear-gradient(135deg, var(--grad-bg-1), var(--grad-bg-2), var(--grad-bg-3), var(--grad-bg-4));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #be185d 0%, #881337 100%);
+        }
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #f472b6 0%, #be185d 100%);
+        }
+
+        .navbar { transition: all 0.3s ease-in-out; }
+        /* Peningkatan efek blur glassmorphism navigasi */
+        .navbar-scrolled {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .dark .navbar-scrolled {
+            background-color: rgba(39, 12, 23, 0.75);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-link.active { 
+            color: #be185d;
+            font-weight: 600; 
+        }
+        .dark .nav-link.active {
+            color: #f472b6;
+        }
+        
+        .project-card, .certification-card, .skill-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+        }
+        /* Peningkatan efek melayang dan shadow glow pada hover */
+        .project-card:hover, .certification-card:hover, .skill-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(190, 24, 93, 0.4);
+            box-shadow: 0 20px 40px -10px rgba(190, 24, 93, 0.15);
+        }
+        .dark .project-card:hover, .dark .certification-card:hover, .dark .skill-card:hover {
+            border-color: rgba(244, 114, 182, 0.4);
+            box-shadow: 0 20px 40px -10px rgba(244, 114, 182, 0.15);
+        }
+        
+        .modal-content { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal.hidden { display: none; }
+        
+       /* Gaya Foto dengan Latar Belakang Eclipse Aura (Lingkaran Cahaya) */
+        .profile-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Lingkaran Aura / Eclipse di belakang foto */
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(190, 24, 93, 0.8) 0%, rgba(136, 19, 55, 0.5) 60%, transparent 80%);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(15px);
+            animation: pulseAura 4s ease-in-out infinite;
+        }
+        .dark .profile-container::before {
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.7) 0%, rgba(190, 24, 93, 0.4) 60%, transparent 80%);
+        }
+
+        @keyframes pulseAura {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .profile-frame {
+            display: inline-block;
+            position: relative;
+            z-index: 1; /* Supaya foto berada di depan lingkaran aura */
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            display: block;
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.6); /* Bingkai tipis elegan di fotonya */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); 
+            animation: floatAnimation 4s ease-in-out infinite; 
+            transition: transform 0.5s ease;
+        }
+        .dark .profile-img {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .profile-img:hover {
+            animation-play-state: paused;
+            transform: scale(1.03);
+        }
+
+        @media (min-width: 768px) {
+            .profile-container::before {
+                width: 400px;
+                height: 400px;
+            }
+            .profile-img { 
+                width: 280px; 
+                height: 280px; 
+            }
+        }
+
+        /* Peningkatan Estetika Glassmorphism pada Contact Form */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(190, 24, 93, 0.05);
+            transition: all 0.3s ease;
+        }
+        .dark .glass-card {
+            background: rgba(61, 19, 36, 0.3); /* matchu-cardDark transparansi tinggi */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(190, 24, 93, 0.2);
+            box-shadow: 0 12px 40px 0 rgba(190, 24, 93, 0.1);
+        }
+        .dark .glass-card:hover {
+            background: rgba(61, 19, 36, 0.5);
+            border: 1px solid rgba(244, 114, 182, 0.15);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .social-link-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-matchu-light dark:bg-matchu-dark text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav id="navbar" class="navbar fixed w-full z-50 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-2xl font-bold text-gradient">Nisa Fayzalmi</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 dark:text-gray-300 hover:text-matchu-primary dark:hover:text-pink-400 transition duration-300">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 dark:text-gray-300 hover:text-matchu-primary dark:hover:text-pink-400 transition duration-300">About</a>
+                    <a href="#portfolio" class="nav-link text-gray-600 dark:text-gray-300 hover:text-matchu-primary dark:hover:text-pink-400 transition duration-300">Portfolio</a>
+                    <a href="#skills" class="nav-link text-gray-600 dark:text-gray-300 hover:text-matchu-primary dark:hover:text-pink-400 transition duration-300">Skills</a>
+                    <a href="#certifications" class="nav-link text-gray-600 dark:text-gray-300 hover:text-matchu-primary dark:hover:text-pink-400 transition duration-300">Certifications</a>
+                    <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300 hover:text-matchu-primary dark:hover:text-pink-400 transition duration-300">Contact</a>
+                    
+                    <!-- Tombol Terang | Gelap Khas Matchu -->
+                    <div id="theme-toggle-btn" class="flex bg-gray-200/50 dark:bg-black/40 rounded-full p-1 cursor-pointer border border-gray-300/50 dark:border-matchu-cardDark shadow-inner ml-2">
+                        <div class="light-text px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-matchu-primary shadow-sm dark:bg-transparent dark:text-gray-400 transition-all duration-300">Terang</div>
+                        <div class="dark-text px-3 py-1.5 rounded-full text-xs font-semibold bg-transparent text-gray-500 dark:bg-matchu-cardDark dark:text-white dark:shadow-sm transition-all duration-300">Gelap</div>
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="mobile-theme-toggle" class="text-gray-600 dark:text-gray-300 p-2 rounded-full bg-gray-200/50 dark:bg-matchu-cardDark">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <button id="menu-btn" class="text-gray-800 dark:text-gray-300 p-2 rounded-md hover:bg-gray-200/50 dark:hover:bg-matchu-cardDark focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-matchu-darker/95 backdrop-blur-lg border-t border-gray-100 dark:border-matchu-cardDark shadow-lg">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-matchu-cardDark hover:text-matchu-primary dark:hover:text-white rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-matchu-cardDark hover:text-matchu-primary dark:hover:text-white rounded-md">About</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-matchu-cardDark hover:text-matchu-primary dark:hover:text-white rounded-md">Skills</a>
+                <a href="#portfolio" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-matchu-cardDark hover:text-matchu-primary dark:hover:text-white rounded-md">Portfolio</a>
+                <a href="#certifications" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-matchu-cardDark hover:text-matchu-primary dark:hover:text-white rounded-md">Certifications</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-matchu-cardDark hover:text-matchu-primary dark:hover:text-white rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12 text-center">
+                <div class="md:w-1/2" data-aos="fade-right" data-aos-duration="1000">
+                    <span class="text-lg text-matchu-primary dark:text-pink-400 font-semibold mb-2 block">Hello, I'm</span>
+                   <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight text-[#561C24]">
+    Choirun<span class="text-gradient">nisa</span> Safa Fayzalmi
+</h1>
+                    <p class="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-lg mx-auto">
+                        Informatics Engineering Graduate <br>
+                        ex intern at PT Phapros Tbk and Telkom Indonesia <br>
+                        focused on <strong>Network Engineering</strong> and <strong>Web Development</strong>.
+                    </p>
+                    <!-- Tambahan Lokasi -->
+                    <p class="text-gray-600 dark:text-gray-400 font-medium mb-4 flex items-center justify-center gap-2" data-aos="fade-up" data-aos-delay="350">
+                        <i class="fas fa-map-marker-alt text-matchu-primary dark:text-pink-400"></i> Semarang, Central Java, Indonesia
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#portfolio" class="px-8 py-3 bg-matchu-primary text-white rounded-full font-medium hover:bg-matchu-secondary transition duration-300 transform hover:scale-105 shadow-lg shadow-pink-500/30">View My Project</a>
+                       
+                    </div>
+                </div>
+               <div class="md:w-auto flex justify-center relative mt-10 md:mt-0" data-aos="zoom-in" data-aos-duration="1500">
+                    <div class="profile-container">
+                        <div class="profile-frame">
+                            <img src="images/n.png" alt="Profile Photo" class="profile-img" />
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+   <section id="about" class="py-24 bg-white dark:bg-matchu-darker px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto"> 
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-4 text-gradient">About Me</h2>
+            <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-duration="800">
+            <h3 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Ready to Shape the Future of Digital & Network Systems</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">My name is Choirunnisa Safa Fayzalmi, an Informatics Engineering Graduate from Politeknik Negeri Semarang focused on Network Engineering and Web Development. Through academic projects and hands-on experience, I have built a solid foundation in configuring network infrastructure, building responsive web applications, and designing intuitive user interfaces.</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">In addition to software development, I have hands-on experience in computer networking, particularly in configuring and managing networking devices. I hold official certifications, including <strong>BNSP (Badan Nasional Sertifikasi Profesi)</strong>, <strong>MTCNA</strong>, and <strong>CCNA</strong>, which strengthen my technical foundation in infrastructure. I enjoy collaborating in teams and continuously improving my problem-solving abilities. Currently, I am seeking professional career opportunities as a <strong>Network Engineer</strong> or <strong>Web Developer</strong>, where I can apply my skills to build secure, scalable, and impactful digital solutions.</p>
+            
+           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+                <!-- Kotak 1: Network & Infrastructure -->
+                <div class="bg-gray-50/50 dark:bg-matchu-cardDark/50 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm backdrop-blur-md">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-4 shadow-md"><i class="fas fa-network-wired text-white text-xl"></i></div>
+                        <h4 class="font-semibold text-lg text-gray-900 dark:text-white">Network & Infrastructure</h4>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Routing & Switching, Server Virtualization (Proxmox/MicroCloud), MikroTik, Cisco</p>
+                </div>
+                
+                <!-- Kotak 2: Web Development -->
+                <div class="bg-gray-50/50 dark:bg-matchu-cardDark/50 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm backdrop-blur-md">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-4 shadow-md"><i class="fas fa-code text-white text-xl"></i></div>
+                        <h4 class="font-semibold text-lg text-gray-900 dark:text-white">Web Development</h4>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Next.js, TypeScript, PostgreSQL, Prisma ORM, Responsive UI Implementation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="portfolio" class="py-24 bg-matchu-light dark:bg-matchu-dark px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">My Portfolio</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-1')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/plns/0.png" alt="Polines Care Web Platform" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Polines Care</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A web-based digital donation platform for social and religious activities on campus, utilizing an AI Recommender System to match donor preferences.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">Full-Stack Dev</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-2')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/justip/0.png" alt="JUSTIPIN UI/UX Design" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">JUSTIPIN</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A web-based proxy shopping platform with intuitive and transparent UI/UX design.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">UI/UX Design</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-3')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/PBL/1.png" alt="Online Exam Platform" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">ONLINE EXAM PLATFORM</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Web admin application for managing online exams, from scheduling to score recap.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">Frontend</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-4')" data-aos="fade-up" data-aos-delay="300">
+                    <img src="images/SUNSET/0.jpg" alt="Automatic Waste Sorting System" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">AUTOMATIC WASTE SORTING SYSTEM</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">An embedded system using sensors to automatically sort waste.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">Embedded System</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-5')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/IOT/3.png" alt="IoT Smart Trash Bin Monitoring" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">SMART TRASH BIN MONITORING</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">An IoT-based system using ESP32 and Firebase for real-time trash monitoring.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">IoT</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-6')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/SOIL.png" alt="Soil Classification AI" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">SOIL CLASSIFICATION</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">An AI-based machine learning project to categorize soil types.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">AI/Machine Learning</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-7')" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/ARCADE.png" alt="Arcade Galaxy Game Collection" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">ARCADE GALAXY</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A collection of space-themed arcade games including Planetarium Journey, Space Arena, and more.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">Game Development</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project<i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-8')" data-aos="fade-up" data-aos-delay="200">
+                    <img src="images/DUNGEON/2.png" alt="Dungeon Seeker Game" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">DUNGEON SEEKER</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">An adventure game featuring chapters like The Forgotten Hall and Dark Forest of Whispers.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">Game Development</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer" onclick="openProjectModal('project-9')" data-aos="fade-up" data-aos-delay="300">
+                    <img src="images/AR/2.png" alt="AR/VR Human Body Organs Project" class="w-full h-52 object-cover" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">AR/VR HUMAN BODY ORGANS</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">An interactive AR/VR application for learning about human organs using Unity and Vuforia.</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xs text-matchu-primary dark:text-pink-300 font-semibold bg-pink-50 dark:bg-matchu-darker px-3 py-1 rounded-full">Multimedia System</span>
+                            <button class="text-sm font-medium text-matchu-secondary dark:text-pink-400 hover:text-matchu-primary transition duration-300">View Project <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="py-24 bg-white dark:bg-matchu-darker px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">My Skills</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div data-aos="fade-right" data-aos-duration="800">
+                    <h3 class="text-2xl font-semibold mb-8 text-center md:text-left text-gray-900 dark:text-white">Design & Development</h3>
+                    <div class="grid grid-cols-2 gap-6 text-center">
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-palette text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">UI/UX Design</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">Figma,Prototyping</p></div>
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-code text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">Web Development</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">HTML, CSS, JavaScript, Tailwind</p></div>
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-brain text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">Machine Learning</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">Python, Data Science, AI</p></div>
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-mobile-alt text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">App Development</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">Flutter, Android Studio</p></div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="800">
+                    <h3 class="text-2xl font-semibold mb-8 text-center md:text-left text-gray-900 dark:text-white">Networking & Tools</h3>
+                    <div class="grid grid-cols-2 gap-6 text-center">
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-network-wired text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">Network Engineering</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">MikroTik, Cisco</p></div>
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-database text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">Database Management</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">MySQL, PostgreSQL, MongoDB</p></div>
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-server text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">Cloud Computing</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">Firebase, AWS</p></div>
+                        <div class="skill-card bg-gray-50/50 dark:bg-matchu-cardDark/50 backdrop-blur-md border border-gray-100 dark:border-white/5 shadow-sm p-6 rounded-2xl"><i class="fas fa-microchip text-matchu-primary dark:text-pink-400 text-4xl mb-4"></i><h4 class="font-bold text-lg text-gray-900 dark:text-white">Embedded System</h4><p class="text-gray-500 dark:text-gray-400 text-sm mt-2">Arduino, ESP32</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="py-24 bg-matchu-light dark:bg-matchu-dark px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto"> 
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">My Certifications</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              
+                <!-- 1. Junior Network Administrator -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-1')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/bnsp.png" alt="BNSP Network Engineering Certification" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Junior Network Administrator</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by BNSP</p></div>
+</div>
+
+<!-- 2. MTCNA -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-2')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/MTCNA.jpg" alt="MTCNA" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">MikroTik Certified Network Associate (MTCNA)</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by MikroTik</p></div>
+</div>
+
+<!-- 3. CCNA -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-3')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/ccna.png" alt="Cisco Certified Network Associate (CCNA)" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">CCNA</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by CISCO Networking Academy</p></div>
+</div>
+
+<!-- 4. Test of English Proficiency (TEPPS) -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-4')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/TEPPS.jpg" alt="Test of English Proficiency (TEPPS)" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Test of English Proficiency (TEPPS)</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by Politeknik Negeri Semarang</p></div>
+</div>
+
+<!-- 5. Database Programming SQL -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-5')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/programming.png" alt="Oracle Academy: Database Programming" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Database Programming SQL</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by ORACLE Academy</p></div>
+</div>
+
+<!-- 6. Database Design SQL -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-6')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/design.png" alt="Oracle Academy: Database Design" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Database Design SQL</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by ORACLE Academy</p></div>
+</div>
+
+<!-- 7. Career Essentials in Generative AI -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-7')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/AI.png" alt="Career Essentials in Generative AI" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Career Essentials in Generative AI</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by LinkedIn</p></div>
+</div>
+
+<!-- 8. Bitcoin for Developers -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-8')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/bitcoin.png" alt="Bitcoin for Developers" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Bitcoin for Developers</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by Saylor.org Academy</p></div>
+</div>
+
+<!-- 9. Software Engineering -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-9')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/software.png" alt="Software Engineering" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Software Engineering</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by Saylor.org Academy</p></div>
+</div>
+
+<!-- 10. C++ Programming -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-10')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/c++.png" alt="C++ Programming" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">C++ Programming</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by Saylor.org Academy</p></div>
+</div>
+
+<!-- 11. Prompt Engineering -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-11')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/engineering.png" alt="Prompt Engineering" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Prompt Engineering untuk Software Developer</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by dicoding</p></div>
+</div>
+
+<!-- 12. Memulai Dasar Pemrograman -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-12')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/dasarprogram.png" alt="Dasar Pemrograman" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by dicoding</p></div>
+</div>
+
+<!-- 13. Belajar Dasar Google Cloud -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-13')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/GOOGLECLOUD.png" alt="Google Cloud" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Belajar Dasar Google Cloud</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by dicoding</p></div>
+</div>
+
+<!-- 14. Belajar Dasar Cloud dan Gen AI -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-14')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/dasar cloud.png" alt="Cloud dan Gen AI" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center"><h4 class="font-bold text-lg text-gray-900 dark:text-white">Belajar Dasar Cloud dan Gen AI di AWS</h4><p class="text-gray-500 dark:text-gray-400 text-sm">Issued by dicoding</p></div>
+</div>
+
+<!-- 15. CSCU Introduction -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-15')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/ID.png" alt="Sertifikat Partisipasi Webinar" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center">
+        <h4 class="font-bold text-lg text-gray-900 dark:text-white">CSCU Introduction : Securing Email Communication</h4>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Certificate of Participation</p>
+    </div>
+</div>
+
+<!-- 16. Spotlight Mengapa Perlu Container -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-16')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/spotlight.png" alt="Sertifikat Kehadiran Webinar" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center">
+        <h4 class="font-bold text-lg text-gray-900 dark:text-white">Spotlight | Mengapa Perlu Container ?</h4>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Certificate of Participation</p>
+    </div>
+</div>
+
+<!-- 17. Data Science Memulai Karir -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-17')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/data science.png" alt="Data Science" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center">
+        <h4 class="font-bold text-lg text-gray-900 dark:text-white">Data Science | Memulai Karir Sebagai Data Scientist</h4>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Certificate of Participation</p>
+    </div>
+</div>
+
+<!-- 18. Machine Learning -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-18')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/machine learning.png" alt="Machine Learning" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center">
+        <h4 class="font-bold text-lg text-gray-900 dark:text-white">Machine Learning | Kustomisasi Model Deep Learning</h4>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Certificate of Participation</p>
+    </div>
+</div>
+
+<!-- 19. Series Workshop Intro to n8n -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-19')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/n8n.png" alt="Workshop n8n" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center">
+        <h4 class="font-bold text-lg text-gray-900 dark:text-white">Series Workshop | Intro to n8n</h4>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Certificate of Participation</p>
+    </div>
+</div>  
+
+<!-- 20. Seminar Cyber -->
+<div class="certification-card bg-white/70 dark:bg-matchu-cardDark/70 backdrop-blur-xl border border-white/40 dark:border-white/5 shadow-xl shadow-pink-900/5 dark:shadow-black/20 rounded-2xl overflow-hidden cursor-pointer block" onclick="openCertModal('cert-20')" data-aos="fade-up" data-aos-delay="100">
+    <img src="images/SeminarCyber.jpg" alt="Seminar Cyber" class="w-full h-48 object-cover object-center" />
+    <div class="p-4 text-center">
+        <h4 class="font-bold text-lg text-gray-900 dark:text-white">The Role of Cyber Security in The Digital Era for a Better Future</h4>
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Certificate of Participation</p>
+    </div>
+</div>     
+    </section>
+
+    <section id="contact" class="py-24 bg-white dark:bg-matchu-darker px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">Get In Touch</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+                <p class="text-gray-600 dark:text-gray-400 mt-6 max-w-2xl mx-auto">
+                    Got a cool project in mind, an exciting role, or just wanna vibe and talk about design & tech?
+                </p>
+            </div>
+
+            <div class="max-w-2xl mx-auto" data-aos="fade-up">
+                
+                <div class="glass-card p-8 rounded-3xl mb-8">
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Let's Connect</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                       My inbox is always open for new opportunities, creative collaborations, or just a friendly chat. Don't be shy—drop a message anytime and let's turn great ideas into reality together! ✨
+                    </p>
+                    <form action="https://formspree.io/f/xrbldydg" method="POST" class="space-y-4">
+                        <div><label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Name</label><input type="text" id="name" name="name" class="w-full px-4 py-3 bg-white/50 dark:bg-matchu-dark/50 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-matchu-primary focus:border-transparent transition" placeholder="Your name" required></div>
+                        <div>
+                            <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" 
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" 
+                            title="Silakan masukkan alamat email yang valid (contoh: nama@gmail.com)" 
+                            class="w-full px-4 py-3 bg-white/50 dark:bg-matchu-dark/50 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-matchu-primary focus:border-transparent transition" 
+                            placeholder="name@gmail.com" required>
+                        </div>
+                        <div><label for="message" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label><textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-white/50 dark:bg-matchu-dark/50 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-matchu-primary focus:border-transparent transition" placeholder="Tell me about your project" required></textarea></div>
+                        <button type="submit" class="w-full px-6 py-3 bg-matchu-primary text-white rounded-full font-medium hover:bg-matchu-secondary transition duration-300 transform hover:scale-105 shadow-lg shadow-pink-500/20">Send Message</button>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-3 text-center">
+                            *Please ensure your email is correct so I can get back to you.
+                        </p>
+                    </form>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Connect With Me</h3>
+                    <a href="https://www.linkedin.com/in/nisafayzalmi6" target="_blank" class="flex items-center bg-white/50 dark:bg-matchu-dark/50 hover:bg-pink-50 dark:hover:bg-matchu-cardDark rounded-xl p-3 mb-3 transition shadow-sm border border-transparent dark:border-white/5">
+                        <div class="bg-blue-600 text-white rounded-lg p-2 mr-4"><i class="fab fa-linkedin-in text-lg"></i></div>
+                        <div>
+                            <p class="font-semibold text-gray-900 dark:text-white">LinkedIn</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Let's connect professionally</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/nnisachou" target="_blank" class="flex items-center bg-white/50 dark:bg-matchu-dark/50 hover:bg-pink-50 dark:hover:bg-matchu-cardDark rounded-xl p-3 mb-3 transition shadow-sm border border-transparent dark:border-white/5">
+                        <div class="bg-gradient-to-r from-pink-600 to-orange-500 text-white rounded-lg p-2 mr-4"><i class="fab fa-instagram text-lg"></i></div>
+                        <div>
+                            <p class="font-semibold text-gray-900 dark:text-white">Instagram</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">@nnisachou</p>
+                        </div>
+                    </a>
+                    <a href="https://github.com/ChirunnisaSafaFayzalmi" target="_blank" class="flex items-center bg-white/50 dark:bg-matchu-dark/50 hover:bg-pink-50 dark:hover:bg-matchu-cardDark rounded-xl p-3 mb-3 transition shadow-sm border border-transparent dark:border-white/5">
+                        <div class="bg-gray-800 text-white rounded-lg p-2 mr-4"><i class="fab fa-github text-lg"></i></div>
+                        <div>
+                            <p class="font-semibold text-gray-900 dark:text-white">Github</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">@ChoirunnisaSafaFayzalmi</p>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+            </div>
+    </section>
+
+    <!-- Modal Projects & Certs -->
+    <div id="project-modal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="modal-content bg-white dark:bg-matchu-cardDark rounded-2xl max-w-3xl w-full mx-auto p-8 relative shadow-2xl border border-gray-200 dark:border-white/10">
+            <button class="modal-close absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-matchu-primary dark:hover:text-white text-3xl font-bold leading-none">&times;</button>
+            <div id="modal-body" class="text-gray-900 dark:text-white"></div>
+        </div>
+    </div>
+    
+    <div id="cert-modal" class="modal fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="modal-content bg-white dark:bg-matchu-cardDark rounded-2xl max-w-4xl w-full mx-auto p-8 relative shadow-2xl border border-gray-200 dark:border-white/10">
+            <button class="cert-modal-close absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-matchu-primary dark:hover:text-white text-3xl font-bold leading-none">&times;</button>
+            <div id="cert-modal-body" class="max-h-[80vh] overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <footer class="bg-white dark:bg-matchu-darker text-gray-800 dark:text-white py-8 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-gray-200 dark:border-white/5 pt-8 text-center">
+                <p class="text-gray-500 dark:text-gray-400">© 2026 Choirunnisa Safa Fayzalmi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        const projects = {
+            'project-1': { 
+            title: 'Polines Care', 
+            images: [ 'images/plns/2.png', 'images/plns/3.png', 'images/plns/4.png', 'images/plns/5.png'],
+            description: 'Polines Care is a web-based digital donation platform designed for social and religious activities at Politeknik Negeri Semarang. It utilizes an AI Recommender System to provide campaign recommendations based on donor preferences, aiming to increase effectiveness, efficiency, and transparency in managing social fundraising.', 
+            tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma ORM', 'PostgreSQL', 'AI Recommender'], 
+            link: 'https://www.polinescare.my.id/', 
+            linkText: 'View Project' 
+},
+            'project-2': { 
+            title: 'JUSTIPIN', 
+            images: ['images/justip/1.png','images/justip/2.png', 'images/justip/3.png' ],
+            description: 'A web-based proxy shopping platform that is safe, simple, and transparent. I designed the UI/UX to ensure an intuitive and efficient user experience when placing orders online. My role involved user research, wireframing, and creating a modern, user-friendly interface.', 
+            tags: ['UI/UX Design', 'User Research', 'Figma', 'Web Design'], 
+            link: 'https://www.figma.com/design/g9hQkN0QuuQQjZ2oX8UCrS/Jastip?node-id=89-1867&t=BGaKFizCNYRbQwLy-1', 
+            linkText: 'View Design' },
+            'project-3': { 
+            title: 'ONLINE EXAM PLATFORM', 
+            images: ['images/PBL/2.png', 'images/PBL/3.png', 'images/PBL/4.png', 'images/PBL/5.png', ],
+            description: 'The online exam management application is a web admin application used to manage online exams with master data, scheduling, monitoring, and score recap features. I was responsible for both front-end and back-end development, ensuring a robust and scalable system.', 
+            tags: ['Frontend', 'Backend', 'PHP', 'JavaScript'], 
+            link: 'https://github.com/ChoirunnisaSafaFayzalmi/aplikasi-ujian-online.git', 
+            linkText: 'View on GitHub' },
+            'project-4': { 
+            title: 'AUTOMATIC WASTE SORTING SYSTEM', 
+            images: ['images/SUNSET/1.jpg','images/SUNSET/2.jpg', 'images/SUNSET/3.jpg' ],
+            description: 'An embedded system that uses sensors and a microcontroller to automatically sort waste into appropriate categories, improving recycling efficiency. This project highlights my skills in hardware-software integration and problem-solving in a real-world context.', 
+            tags: ['Embedded System', 'IoT', 'Arduino', 'Sensors'], 
+            link: '#', 
+            linkText: 'View Documentation' },
+            'project-5': { 
+            title: 'DESIGN OF IOT-BASED SMART TRASH BIN MONITORING USING ESP32 AND FIREBASE', 
+            images: [ 'images/IOT/13.png', 'images/IOT/9.png', 'images/IOT/10.png', 'images/IOT/11.png', 'images/IOT/12.png', ], 
+            description: 'A smart trash bin monitoring system leveraging IoT technology, designed using an ESP32 microcontroller and integrated with Firebase for real-time data storage and monitoring. I developed the entire system from the ground up, including hardware and software components.', 
+            tags: ['IoT', 'Embedded System', 'ESP32', 'Firebase'], 
+            link: 'https://ejurnal.lkpkaryaprima.id/index.php/juktisi/article/view/420', 
+            linkText: 'View on jurnal' 
+            },
+            'project-6': { 
+            title: 'SOIL CLASSIFICATION', 
+            image: 'images/SOIL.png', 
+            description: 'An AI-based project that uses machine learning to categorize soil types from their characteristics, supporting agriculture and environmental management. This project showcases my proficiency in data science and machine learning techniques.', 
+            tags: ['Artificial Intelligence', 'Machine Learning', 'Data Science', 'Python'], 
+            link: 'https://github.com/ChoirunnisaSafaFayzalmi/Klasifikasi_Tanah.git', 
+            linkText: 'View on GitHub' },
+            'project-7': { 
+            title: 'ARCADE GALAXY', 
+            images: ['images/PLANET.png','images/SPACE.png','images/COSMIC.png'],
+            description: 'Dive into Arcade Galaxy, a space arcade collection! This project features three distinct games: the exploratory Planetarium Journey, the action-packed Space Arena, and the strategic Cosmic Gatekeepers.', 
+            tags: ['Game Development', 'Unity', 'C#', 'Canva'], 
+            link: '#', 
+            linkText: 'View Case Study' },
+            'project-8': { 
+            title: 'DUNGEON SEEKER', 
+            images: [ 'images/DUNGEON/Play.png', 'images/DUNGEON/Play (1).png', 'images/DUNGEON/Play (2).png', ],
+            description: 'An epic action-adventure Unity game featuring three gripping chapters. Survive the haunted puzzles of The Forgotten Hall, brave the scorching lava of the Chamber of Flame, and conquer the mind-bending illusions of The Dark Forest of Whispers.', 
+            tags: ['Game Development', 'Unity', 'C#', 'Canva'], 
+            link: 'https://drive.google.com/drive/folders/1FHRaVELOD3Pe9DsRix8Zo8U6MCyjSDFj?usp=sharing',
+            linkText: 'View Case Study'},
+            'project-9': { 
+            title: 'AR/VR HUMAN BODY ORGANS', 
+            images: ['images/AR/4.png', 'images/AR/5.png', 'images/AR/6.png', 'images/AR/8.png', 'images/AR/9.png', 'images/AR/10.png', 'images/AR/11.png', ],
+            description: 'An interactive AR/VR application for learning about human organs. Developed with Unity and Vuforia, with UI assets designed in Canva to create an engaging educational experience.', 
+            tags: ['AR/VR', 'Unity', 'Vuforia', 'Educational App', 'Canva'], 
+            link: 'https://drive.google.com/drive/folders/1c6mZlMou-8K4h7Fc06gqbd3byp-sYzoI?usp=sharing',
+            linkText: 'View Documentation' },
+        };
+        
+        const certifications = {
+        'cert-1': { image: 'images/bnsp.png', alt: 'Junior Network Administrator' },
+        'cert-2': { image: 'images/MTCNA.jpg', alt: 'MikroTik Certified Network Associate (MTCNA)' },
+        'cert-3': { image: 'images/ccna.png', alt: 'CCNA' },
+        'cert-4': { image: 'images/TEPPS.jpg', alt: 'Test of English Proficiency (TEPPS)' },
+        'cert-5': { image: 'images/programming.png', alt: 'Database Programming SQL' },
+        'cert-6': { image: 'images/design.png', alt: 'Database Design SQL' },
+        'cert-7': { image: 'images/AI.png', alt: 'Career Essentials in Generative AI' },
+        'cert-8': { image: 'images/bitcoin.png', alt: 'Bitcoin for Developers' },
+        'cert-9': { image: 'images/software.png', alt: 'Software Engineering' },
+        'cert-10': { image: 'images/c++.png', alt: 'C++ Programming' },
+        'cert-11': { image: 'images/engineering.png', alt: 'Prompt Engineering untuk Software Developer' },
+        'cert-12': { image: 'images/dasarprogram.png', alt: 'Memulai Dasar Pemrograman' },
+        'cert-13': { image: 'images/GOOGLECLOUD.png', alt: 'Belajar Dasar Google Cloud' },
+        'cert-14': { image: 'images/dasar cloud.png', alt: 'Belajar Dasar Cloud dan Gen AI di AWS' },
+        'cert-15': { image: 'images/ID.png', alt: 'CSCU Introduction : Securing Email Communication' },
+        'cert-16': { image: 'images/spotlight.png', alt: 'Spotlight | Mengapa Perlu Container ?' },
+        'cert-17': { image: 'images/data science.png', alt: 'Data Science | Memulai Karir Sebagai Data Scientist' },
+        'cert-18': { image: 'images/machine learning.png', alt: 'Machine Learning | Kustomisasi Model Deep Learning' },
+        'cert-19': { image: 'images/n8n.png', alt: 'Series Workshop | Intro to n8n' },
+        'cert-20': { image: 'images/SeminarCyber.jpg', alt: 'The Role of Cyber Security in The Digital Era for a Better Future' }
+        };
+
+        AOS.init({ once: true, duration: 800 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+    
+            // --- LOGIKA TEMA LIGHT/DARK ---
+            const html = document.documentElement;
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const lightText = themeToggleBtn.querySelector('.light-text');
+            const darkText = themeToggleBtn.querySelector('.dark-text');
+
+            function applyTheme(isDark) {
+                if (isDark) {
+                    html.classList.add('dark');
+                    localStorage.theme = 'dark';
+                    lightText.className = "light-text px-3 py-1.5 rounded-full text-xs font-semibold bg-transparent text-gray-500 dark:text-gray-400 transition-all duration-300";
+                    darkText.className = "dark-text px-3 py-1.5 rounded-full text-xs font-semibold bg-matchu-cardDark text-white shadow-sm transition-all duration-300";
+                } else {
+                    html.classList.remove('dark');
+                    localStorage.theme = 'light';
+                    lightText.className = "light-text px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-matchu-primary shadow-sm transition-all duration-300";
+                    darkText.className = "dark-text px-3 py-1.5 rounded-full text-xs font-semibold bg-transparent text-gray-500 transition-all duration-300";
+                }
+            }
+
+            // Set awal tema
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                applyTheme(true);
+            } else {
+                applyTheme(false);
+            }
+
+            themeToggleBtn.addEventListener('click', () => applyTheme(!html.classList.contains('dark')));
+            mobileThemeToggle.addEventListener('click', () => applyTheme(!html.classList.contains('dark')));
+            // ------------------------------
+
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+            
+            const interactiveElements = document.querySelectorAll('a, button, .project-card, .certification-card, .skill-card, #theme-toggle-btn');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+            });
+
+            const navbar = document.getElementById('navbar');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
+            });
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${targetId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.4 });
+            sections.forEach(section => sectionObserver.observe(section));
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                    if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            const projectModal = document.getElementById('project-modal');
+            const projectModalBody = document.getElementById('modal-body');
+            const projectModalClose = projectModal.querySelector('.modal-close');
+            
+            window.openProjectModal = function(projectId) {
+                const project = projects[projectId];
+                if (!project) return;
+
+                const imageList = project.images || (project.image ? [project.image] : []);
+                
+                let galleryHTML = '';
+                if (imageList.length > 0) {
+                    galleryHTML = `
+                        <div class="flex overflow-x-auto gap-4 pb-4 mb-6 border-b border-gray-200 dark:border-white/10">
+                            ${imageList.map(imgSrc => `
+                                <img src="${imgSrc}" alt="${project.title} gallery image" class="h-64 object-cover rounded-xl flex-shrink-0">
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                projectModalBody.innerHTML = `
+                    ${galleryHTML} 
+                    <h3 class="text-3xl font-bold mb-3 text-gray-900 dark:text-white">${project.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">${project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        ${project.tags.map(tag => `<span class="bg-pink-50 text-matchu-primary dark:bg-black/30 dark:text-pink-300 text-sm px-3 py-1 rounded-full border border-pink-100 dark:border-white/10">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${project.link}" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-matchu-primary text-white rounded-full font-medium hover:bg-matchu-secondary transition duration-300 shadow-md shadow-pink-500/20">
+                        ${project.linkText} <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-2"></i>
+                    </a>`;
+                
+                projectModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            const closeProjectModal = () => {
+                projectModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+            projectModalClose.addEventListener('click', closeProjectModal);
+            
+            const certModal = document.getElementById('cert-modal');
+            const certModalBody = document.getElementById('cert-modal-body');
+            const certModalClose = certModal.querySelector('.cert-modal-close');
+            
+            window.openCertModal = function(certId) {
+                const cert = certifications[certId];
+                if (!cert) return;
+                certModalBody.innerHTML = `<img src="${cert.image}" alt="${cert.alt}" class="w-full h-auto object-contain rounded-xl">`;
+                certModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            const closeCertModal = () => {
+                certModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+            certModalClose.addEventListener('click', closeCertModal);
+
+            window.addEventListener('click', (e) => {
+                if (e.target === projectModal) closeProjectModal();
+                if (e.target === certModal) closeCertModal();
+            });
+        });
+
+            // Menampilkan halaman dengan mulus hanya setelah semua gaya dan gambar selesai dimuat
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100); // Jeda ekstra 0.1 detik untuk memastikan Tailwind CDN selesai merender
+        });
+    </script>
+</body>
+</html>
